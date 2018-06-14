@@ -1,0 +1,109 @@
+entity Location {
+	streetAddress String,
+	postalCode String,
+	city String,
+	county String
+}
+
+entity Tank {
+	tankName String required,
+    tankType TankType required,
+    description String,
+    timestamp Integer required
+}
+
+enum TankType {
+    POND,  AQUARIUM
+}
+
+entity Device {
+	deviceName String required,
+    deviceType DeviceType required,
+    description String required,
+    timestamp Integer required
+}
+
+enum DeviceType {
+    PUMP,  FILTER, UVLAMP, UVCLARIFIER, AIRPUMP, OTHER
+}
+
+entity TempMeter {
+    readingDate ZonedDateTime,
+	tempVal   Double required,
+    timestamp Integer required
+}
+
+entity MeterReading {
+	readingDate ZonedDateTime required,
+	description String,
+	reading Double required,
+	tempVal Double required
+}
+
+ entity FilterPumpCleaning {
+	cleaningDate ZonedDateTime required,
+	description String,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+ entity WaterChange {
+	changeDate ZonedDateTime required,
+	description String,
+    readingBefore Double required,
+    readingAfter Double required,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+ entity LiveStock {
+	date ZonedDateTime required,
+    reason StockCase,
+	description String,
+    qty Integer required,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+ entity ChemicalAnalysis {
+	date ZonedDateTime required,
+	nO2 String,
+    nO3 String,
+    nH4 String,
+    ph String,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+  entity Chemicals {
+	date ZonedDateTime required,
+	qty Integer,
+    reason String,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+  entity OtherWorks {
+	date ZonedDateTime required,
+    reason String,
+	qty Integer,
+    descripton String,
+    tempVal Double required,
+    timestamp Integer,
+}
+
+
+enum StockCase {
+    ADDED, REMOVED, DIED
+}
+
+
+// Set pagination options
+paginate Device, TempMeter with infinite-scroll
+paginate MeterReading with pagination
+paginate FilterPumpCleaning, ChemicalAnalysis, Chemicals, LiveStock with pagination
+
+dto * with mapstruct
+
+// Set an angular suffix
+angularSuffix * with mySuffix
