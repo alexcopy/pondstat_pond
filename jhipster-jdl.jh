@@ -106,4 +106,4 @@ paginate FilterPumpCleaning, ChemicalAnalysis, Chemicals, LiveStock with paginat
 dto * with mapstruct
 
 // Set an angular suffix
-angularSuffix * with mySuffix
+angularSuffix * with pondStat
